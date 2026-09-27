@@ -79,10 +79,6 @@
 
 
     <div class="navbar-right">
-
-        
-
-
         <!-- User -->
 
         <a th:href="@{/user/profile}"
@@ -92,8 +88,8 @@
 
                 <span>
                     <img th:src="@{/images/{image}(image=${user.imageUrl})}"
-                             alt="Profile Photo"
-                             class="profile-avatar">
+                             alt="Profile"
+                             class="profile-imageNavbar">
                 </span>
 
             </div>
@@ -142,7 +138,7 @@
                 <span>
 			        <img th:src="@{/images/{image}(image=${user.imageUrl})}"
                              alt="Profile"
-                             class="profile-image">
+                             class="profile-imageSidebar">
                 </span>
 
             </div>
