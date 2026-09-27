@@ -1,4 +1,4 @@
-"###### SmarterContactMangement" 
+###### SmarterContactMangement
 ## 📸 Screenshots
 
 ### Login Page
