@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Change Password</title>
+</head>
+
+<body>
+
+<section class="change-password-page">
+
+    <div class="change-password-background">
+
+        <div class="change-password-container">
+
+            <!-- ================= LEFT PANEL ================= -->
+
+            <div class="change-password-info">
+
+                <div class="change-password-info-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
+
+                <span class="change-password-badge">
+                    <i class="bi bi-shield-check"></i>
+                    Account Security
+                </span>
+
+                <h1>
+                    Create a<br>
+                    <span>New Password.</span>
+                </h1>
+
+                <p>
+                    Choose a strong password to protect your account
+                    and keep your contacts and personal information secure.
+                </p>
+
+
+                <div class="password-benefits">
+
+                    <div class="password-benefit">
+
+                        <div class="password-benefit-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <div>
+                            <strong>Keep Your Account Safe</strong>
+                            <small>Use a strong and unique password</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="password-benefit">
+
+                        <div class="password-benefit-icon">
+                            <i class="bi bi-key-fill"></i>
+                        </div>
+
+                        <div>
+                            <strong>Protect Your Information</strong>
+                            <small>Keep your account information private</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="password-benefit">
+
+                        <div class="password-benefit-icon">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+
+                        <div>
+                            <strong>Quick & Secure</strong>
+                            <small>Your new password will be updated securely</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RIGHT CARD ================= -->
+
+            <div class="change-password-card">
+
+                <div class="change-password-header">
+
+                    <div class="change-password-icon">
+                        <i class="bi bi-key-fill"></i>
+                    </div>
+
+                    <h2>Change Password</h2>
+
+                    <p>
+                        Enter your new password below.
+                    </p>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div th:if="${message != null}"
+                     class="change-password-message">
+
+                    <div th:class="'alert alert-' + ${message.type}"
+                         role="alert">
+
+                        <i class="bi bi-info-circle-fill me-2"></i>
+
+                        <span th:text="${message.content}"></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form th:action="@{/changePassword}"
+                      method="post"
+                      class="change-password-form">
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="change-password-input-group">
+
+                        <label for="newPassword">
+                            New Password
+                        </label>
+
+                        <div class="change-password-input-wrapper">
+
+                            <i class="bi bi-lock-fill change-password-input-icon"></i>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                name="newPassword"
+                                placeholder="Enter new password"
+                                required
+                                minlength="6">
+
+                            <button
+                                type="button"
+                                class="change-password-toggle"
+                                onclick="toggleNewPassword()"
+                                aria-label="Show password">
+
+                                <i class="bi bi-eye"
+                                   id="newPasswordIcon"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD REQUIREMENTS -->
+
+                    <div class="password-requirements">
+
+                        <div class="requirements-title">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Password tips
+                        </div>
+
+                        <div class="requirement">
+                            <i class="bi bi-check2"></i>
+                            Use at least 6 characters
+                        </div>
+
+                        <div class="requirement">
+                            <i class="bi bi-check2"></i>
+                            Avoid using easy-to-guess passwords
+                        </div>
+
+                        <div class="requirement">
+                            <i class="bi bi-check2"></i>
+                            Use a combination of letters and numbers
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="change-password-submit-btn">
+
+                        <i class="bi bi-check2-circle me-2"></i>
+
+                        Change Password
+
+                    </button>
+
+                </form>
+
+
+                <!-- SECURITY -->
+
+                <div class="change-password-security">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <span>
+                        Your password is securely processed.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+function toggleNewPassword() {
+
+    const password =
+        document.getElementById("newPassword");
+
+    const icon =
+        document.getElementById("newPasswordIcon");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        icon.classList.remove("bi-eye");
+
+        icon.classList.add("bi-eye-slash");
+
+    } else {
+
+        password.type = "password";
+
+        icon.classList.remove("bi-eye-slash");
+
+        icon.classList.add("bi-eye");
+
+    }
+}
+
+</script>
+
+</body>
+</html>

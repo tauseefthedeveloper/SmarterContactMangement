@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<section class="signup-page">
+
+    <div class="signup-background">
+
+        <div class="signup-container">
+
+            <!-- ================= LEFT SIDE ================= -->
+
+            <div class="signup-info">
+
+                <div class="signup-brand-icon">
+
+                    <i class="bi bi-person-plus-fill"></i>
+
+                </div>
+
+                <span class="signup-small-title">
+                    SMARTER CONTACT MANAGEMENT
+                </span>
+
+                <h1>
+                    Create Your
+                    <span>Account.</span>
+                </h1>
+
+                <p>
+                    Join Smarter Contact Management and keep your
+                    important connections organized, accessible
+                    and easy to manage.
+                </p>
+
+
+                <div class="signup-benefits">
+
+                    <div>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            Manage your contacts easily
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <i class="bi bi-shield-check"></i>
+
+                        <span>
+                            Keep your information organized
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <i class="bi bi-lightning-charge-fill"></i>
+
+                        <span>
+                            Simple and responsive experience
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SIGNUP CARD ================= -->
+
+            <div class="signup-card">
+
+                <div class="signup-card-header">
+
+                    <div class="signup-icon">
+
+                        <i class="bi bi-person-plus"></i>
+
+                    </div>
+
+                    <h2>
+                        Register
+                    </h2>
+
+                    <p>
+                        Create your account to get started
+                    </p>
+
+                </div>
+
+
+                <!-- ================= MESSAGE ================= -->
+
+                <div th:if="${message != null}"
+                     class="signup-message">
+
+                    <div th:class="'alert alert-' + ${message.type}"
+                         role="alert"
+                         th:utext="${message.content}">
+                    </div>
+
+                </div>
+
+
+                <!-- ================= FORM ================= -->
+
+                <form th:action="@{/register}"
+                      method="post"
+                      th:object="${user}"
+                      class="signup-form">
+
+
+                    <!-- Name -->
+
+                    <div class="signup-input-group">
+
+                        <label for="name">
+
+                            <i class="bi bi-person"></i>
+
+                            Full Name
+
+                        </label>
+
+                        <div class="signup-input-wrapper">
+
+                            <i class="bi bi-person input-icon"></i>
+
+                            <input
+                                th:field="*{name}"
+                                th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                type="text"
+                                id="name"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required>
+
+                        </div>
+
+                        <div class="signup-error"
+                             th:each="e : ${#fields.errors('name')}"
+                             th:text="${e}">
+                        </div>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="signup-input-group">
+
+                        <label for="email">
+
+                            <i class="bi bi-envelope"></i>
+
+                            Email Address
+
+                        </label>
+
+                        <div class="signup-input-wrapper">
+
+                            <i class="bi bi-envelope input-icon"></i>
+
+                            <input
+                                th:field="*{email}"
+                                th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required>
+
+                        </div>
+
+                        <div class="signup-error"
+                             th:each="e : ${#fields.errors('email')}"
+                             th:text="${e}">
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="signup-input-group">
+
+                        <label for="signupPassword">
+
+                            <i class="bi bi-lock"></i>
+
+                            Password
+
+                        </label>
+
+                        <div class="signup-input-wrapper">
+
+                            <i class="bi bi-lock input-icon"></i>
+
+                            <input
+                                th:field="*{password}"
+                                th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                type="password"
+                                id="signupPassword"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="signup-password-toggle"
+                                onclick="toggleSignupPassword()"
+                                aria-label="Show password">
+
+                                <i class="bi bi-eye"
+                                   id="signupPasswordIcon"></i>
+
+                            </button>
+
+                        </div>
+
+                        <div class="signup-error"
+                             th:each="e : ${#fields.errors('password')}"
+                             th:text="${e}">
+                        </div>
+
+                    </div>
+
+
+                    <!-- About -->
+
+                    <div class="signup-input-group">
+
+                        <label for="about">
+
+                            <i class="bi bi-card-text"></i>
+
+                            About You
+
+                        </label>
+
+                        <div class="signup-textarea-wrapper">
+
+                            <i class="bi bi-pencil input-icon textarea-icon"></i>
+
+                            <textarea
+                                th:field="*{about}"
+                                id="about"
+                                class="signup-textarea"
+                                placeholder="Tell us a little about yourself"
+                                rows="3"></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Agreement -->
+
+                    <div class="signup-agreement">
+
+                        <input
+                            type="checkbox"
+                            name="agree"
+                            id="agreement"
+                            required>
+
+                        <label for="agreement">
+
+                            I agree to the
+                            <a href="#">
+                                Terms & Conditions
+                            </a>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button type="submit"
+                            class="signup-submit-btn">
+
+                        <span>
+                            Create Account
+                        </span>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </form>
+
+
+                <!-- ================= LOGIN ================= -->
+
+                <div class="signup-divider">
+
+                    <span>OR</span>
+
+                </div>
+
+
+                <div class="signup-login">
+
+                    <p>
+                        Already have an account?
+                    </p>
+
+                    <a th:href="@{/signin}">
+
+                        Sign in here
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+    function toggleSignupPassword() {
+
+        const password =
+            document.getElementById("signupPassword");
+
+        const icon =
+            document.getElementById("signupPasswordIcon");
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            icon.classList.remove("bi-eye");
+
+            icon.classList.add("bi-eye-slash");
+
+        } else {
+
+            password.type = "password";
+
+            icon.classList.remove("bi-eye-slash");
+
+            icon.classList.add("bi-eye");
+
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>

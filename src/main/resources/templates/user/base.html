@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(content)">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${title}">Smarter Contact Management</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/User CSS/UserCss.css}">
+
+</head>
+
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="top-navbar">
+
+    <div class="navbar-left">
+
+        <!-- Mobile Menu -->
+        <button class="mobile-menu-btn"
+                onclick="toggleSidebar()">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+        <a th:href="@{/user/dashboard}"
+           class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-address-book"></i>
+            </div>
+
+            <div>
+                <span class="brand-title">
+                    Smarter
+                </span>
+
+                <span class="brand-subtitle">
+                    Contact Management
+                </span>
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <div class="navbar-right">
+
+        <!-- Notification -->
+
+        <button class="nav-icon-btn">
+
+            <i class="fa-regular fa-bell"></i>
+
+            <span class="notification-dot"></span>
+
+        </button>
+
+
+        <!-- User -->
+
+        <a th:href="@{/user/profile}"
+           class="user-menu">
+
+            <div class="user-avatar">
+
+                <span
+                    th:text="${user.name != null ? user.name.substring(0,1).toUpperCase() : 'U'}">
+                    U
+                </span>
+
+            </div>
+
+            <div class="user-info">
+
+                <span class="user-name"
+                      th:text="${user.name}">
+                    User
+                </span>
+
+                <span class="user-role">
+                    My Account
+                </span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down user-arrow"></i>
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= SIDEBAR OVERLAY ================= -->
+
+<div class="sidebar-overlay"
+     onclick="toggleSidebar()">
+</div>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <!-- Sidebar Header -->
+
+    <div class="sidebar-header">
+
+        <div class="sidebar-user">
+
+            <div class="sidebar-avatar">
+
+                <span
+                    th:text="${user.name != null ? user.name.substring(0,1).toUpperCase() : 'U'}">
+                    U
+                </span>
+
+            </div>
+
+            <div>
+
+                <div class="sidebar-user-name"
+                     th:text="${user.name}">
+                    User
+                </div>
+
+                <div class="sidebar-user-status">
+
+                    <span class="status-dot"></span>
+
+                    Online
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Close button -->
+
+        <button class="sidebar-close"
+                onclick="toggleSidebar()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- Navigation -->
+
+    <div class="sidebar-section-title">
+        MAIN MENU
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <!-- Dashboard -->
+
+        <a th:href="@{/user/dashboard}"
+           th:classappend="${activePage == 'dashboard'} ? 'active' : ''"
+           class="sidebar-item">
+
+            <span class="sidebar-icon">
+                <i class="fa-solid fa-house"></i>
+            </span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!-- Contacts -->
+
+        <a th:href="@{/user/showContact/0}"
+           th:classappend="${activePage == 'showContact'} ? 'active' : ''"
+           class="sidebar-item">
+
+            <span class="sidebar-icon">
+                <i class="fa-solid fa-address-book"></i>
+            </span>
+
+            <span>My Contacts</span>
+
+        </a>
+
+
+        <!-- Add Contact -->
+
+        <a th:href="@{/user/addContact}"
+           th:classappend="${activePage == 'addContact'} ? 'active' : ''"
+           class="sidebar-item">
+
+            <span class="sidebar-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </span>
+
+            <span>Add Contact</span>
+
+        </a>
+
+
+        <div class="sidebar-divider"></div>
+
+
+        <div class="sidebar-section-title">
+            ACCOUNT
+        </div>
+
+
+        <!-- Profile -->
+
+        <a th:href="@{/user/profile}"
+           th:classappend="${activePage == 'profile'} ? 'active' : ''"
+           class="sidebar-item">
+
+            <span class="sidebar-icon">
+                <i class="fa-solid fa-circle-user"></i>
+            </span>
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <!-- Settings -->
+
+        <a th:href="@{/user/settings}"
+           th:classappend="${activePage == 'settings'} ? 'active' : ''"
+           class="sidebar-item">
+
+            <span class="sidebar-icon">
+                <i class="fa-solid fa-gear"></i>
+            </span>
+
+            <span>Settings</span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- Sidebar Bottom -->
+
+    <div class="sidebar-bottom">
+
+        <a th:href="@{/logout}"
+           class="sidebar-item logout-item">
+
+            <span class="sidebar-icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+
+    <!-- Page Header -->
+
+    <div class="page-top-bar">
+
+        <div>
+
+            <h1 class="page-title"
+                th:text="${title}">
+                Dashboard
+            </h1>
+
+            <p class="page-subtitle">
+                Manage your contacts easily and efficiently.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SESSION MESSAGE ================= -->
+
+    <div th:if="${session.message}"
+         class="alert-wrapper">
+
+        <div th:classappend="${'alert-' + session.message.type}"
+             class="custom-alert"
+             role="alert">
+
+            <div class="alert-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div class="alert-content">
+
+                <span th:text="${session.message.content}">
+                    Message
+                </span>
+
+            </div>
+
+            <button type="button"
+                    class="alert-close"
+                    onclick="this.parentElement.remove()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NORMAL MESSAGE ================= -->
+
+    <div th:if="${message != null}"
+         class="alert-wrapper">
+
+        <div th:class="'custom-alert alert-' + ${message.type}"
+             role="alert">
+
+            <div class="alert-icon">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+            </div>
+
+            <div class="alert-content">
+
+                <span th:text="${message.content}">
+                    Message
+                </span>
+
+            </div>
+
+            <button type="button"
+                    class="alert-close"
+                    onclick="this.parentElement.remove()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PAGE CONTENT ================= -->
+
+    <div class="content-container">
+
+        <div th:replace="${content}">
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ================= SCRIPTS ================= -->
+
+<script th:src="@{/js/script.js}"></script>
+
+<script
+    src="https://code.jquery.com/jquery-3.7.1.min.js">
+</script>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- Sidebar Toggle -->
+
+<script>
+
+function toggleSidebar() {
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const overlay =
+        document.querySelector(".sidebar-overlay");
+
+    sidebar.classList.toggle("sidebar-open");
+
+    overlay.classList.toggle("overlay-show");
+
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sidebarItems =
+        document.querySelectorAll(".sidebar-item");
+
+    sidebarItems.forEach(function (item) {
+
+        item.addEventListener("click", function () {
+
+            if (window.innerWidth <= 991) {
+
+                const sidebar =
+                    document.getElementById("sidebar");
+
+                const overlay =
+                    document.querySelector(".sidebar-overlay");
+
+                sidebar.classList.remove("sidebar-open");
+
+                overlay.classList.remove("overlay-show");
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

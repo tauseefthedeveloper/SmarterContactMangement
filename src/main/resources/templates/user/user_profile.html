@@ -1,0 +1,702 @@
+```html
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="user/base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<section>
+
+    <div class="profile-page">
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="profile-page-header">
+
+            <div>
+                <span class="profile-eyebrow">
+                    ACCOUNT
+                </span>
+
+                <h2 class="profile-page-title">
+                    My Profile
+                </h2>
+
+                <p class="profile-page-subtitle">
+                    Manage your account information and profile details.
+                </p>
+            </div>
+
+            <button type="button"
+                    class="profile-edit-header-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+
+                <i class="fa-solid fa-user-pen"></i>
+
+                Edit Profile
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             PROFILE CARD
+        ================================================== -->
+
+        <div class="profile-main-card"
+             th:if="${user}">
+
+            <!-- Profile Top -->
+
+            <div class="profile-cover">
+
+                <div class="profile-user-area">
+
+                    <div class="profile-avatar-wrapper">
+
+                        <img th:src="@{/images/{image}(image=${user.imageUrl})}"
+                             alt="Profile Photo"
+                             class="profile-avatar">
+
+                        <span class="profile-online-dot"></span>
+
+                    </div>
+
+                    <div class="profile-user-info">
+
+                        <span class="profile-account-label">
+                            PERSONAL ACCOUNT
+                        </span>
+
+                        <h3 th:text="${user.name}">
+                            User Name
+                        </h3>
+
+                        <p th:text="${user.email}">
+                            user@example.com
+                        </p>
+
+                        <span class="profile-role-badge">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <span th:text="${user.role == 'ROLE_USER'
+                                    ? 'Normal User'
+                                    : 'Admin'}">
+                                Normal User
+                            </span>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ACCOUNT SUMMARY
+            ================================================== -->
+
+            <div class="profile-summary-grid">
+
+                <!-- User ID -->
+
+                <div class="profile-summary-item">
+
+                    <div class="profile-summary-icon id-summary">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+
+                    <div>
+                        <span>User ID</span>
+
+                        <strong>
+                            SCM2025<span th:text="${user.Id}"></span>
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Account Status -->
+
+                <div class="profile-summary-item">
+
+                    <div class="profile-summary-icon status-summary">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div>
+                        <span>Account Status</span>
+
+                        <strong th:class="${user.enabled
+                                ? 'profile-status-active'
+                                : 'profile-status-inactive'}"
+                                th:text="${user.enabled
+                                ? 'Active'
+                                : 'Not Active'}">
+                            Active
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Contacts -->
+
+                <div class="profile-summary-item">
+
+                    <div class="profile-summary-icon contact-summary">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+
+                    <div>
+                        <span>Total Contacts</span>
+
+                        <strong th:text="${totalContact}">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DETAILS
+            ================================================== -->
+
+            <div class="profile-details-section">
+
+                <div class="profile-section-heading">
+
+                    <div class="profile-section-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+
+                    <div>
+                        <h4>Account Information</h4>
+
+                        <p>
+                            Your registered account information.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="profile-details-grid">
+
+                    <!-- Full Name -->
+
+                    <div class="profile-detail-box">
+
+                        <div class="detail-box-icon name-detail">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div class="detail-box-content">
+
+                            <span>Full Name</span>
+
+                            <strong th:text="${user.name}">
+                                User Name
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="profile-detail-box">
+
+                        <div class="detail-box-icon email-detail">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
+                        <div class="detail-box-content">
+
+                            <span>Email Address</span>
+
+                            <strong th:text="${user.email}">
+                                user@example.com
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Account Type -->
+
+                    <div class="profile-detail-box">
+
+                        <div class="detail-box-icon role-detail">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+
+                        <div class="detail-box-content">
+
+                            <span>Account Type</span>
+
+                            <strong th:text="${user.role == 'ROLE_USER'
+                                    ? 'Normal User'
+                                    : 'Admin'}">
+                                Normal User
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Account Status -->
+
+                    <div class="profile-detail-box">
+
+                        <div class="detail-box-icon status-detail">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div class="detail-box-content">
+
+                            <span>Account Status</span>
+
+                            <strong th:class="${user.enabled
+                                    ? 'profile-status-active'
+                                    : 'profile-status-inactive'}"
+                                    th:text="${user.enabled
+                                    ? 'Active'
+                                    : 'Not Active'}">
+                                Active
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ABOUT
+            ================================================== -->
+
+            <div class="profile-about-section">
+
+                <div class="profile-section-heading">
+
+                    <div class="profile-section-icon about-profile-icon">
+                        <i class="fa-solid fa-align-left"></i>
+                    </div>
+
+                    <div>
+                        <h4>About Me</h4>
+
+                        <p>
+                            Information provided in your profile.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="profile-about-box">
+
+                    <p th:if="${user.about != null and !#strings.isEmpty(user.about)}"
+                       th:text="${user.about}">
+                        About user
+                    </p>
+
+                    <div th:unless="${user.about != null and !#strings.isEmpty(user.about)}"
+                         class="profile-empty-about">
+
+                        <i class="fa-regular fa-note-sticky"></i>
+
+                        <span>
+                            No information has been added yet.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Bottom -->
+
+            <div class="profile-card-footer">
+
+                <div class="profile-security-message">
+
+                    <div class="security-profile-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+                        <strong>Keep your profile updated</strong>
+
+                        <p>
+                            Make sure your account information is always
+                            up to date.
+                        </p>
+                    </div>
+
+                </div>
+
+                <button type="button"
+                        class="profile-footer-edit-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Edit Profile
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             USER NOT FOUND
+        ================================================== -->
+
+        <div th:unless="${user}"
+             class="profile-not-found">
+
+            <div class="profile-not-found-icon">
+
+                <i class="fa-solid fa-user-slash"></i>
+
+            </div>
+
+            <h4>
+                Profile Not Available
+            </h4>
+
+            <p>
+                Your profile information could not be loaded.
+            </p>
+
+            <a th:href="@{/user/dashboard}"
+               class="profile-dashboard-btn">
+
+                <i class="fa-solid fa-house"></i>
+
+                Go to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         EDIT PROFILE MODAL
+    ====================================================== -->
+
+    <div class="modal fade"
+         id="staticBackdrop"
+         data-bs-backdrop="static"
+         data-bs-keyboard="false"
+         tabindex="-1"
+         aria-labelledby="staticBackdropLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+
+            <div class="modal-content profile-modal">
+
+                <!-- Modal Header -->
+
+                <div class="modal-header profile-modal-header">
+
+                    <div class="modal-title-wrapper">
+
+                        <div class="modal-title-icon">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </div>
+
+                        <div>
+
+                            <h5 class="modal-title"
+                                id="staticBackdropLabel">
+
+                                Edit Profile
+
+                            </h5>
+
+                            <p>
+                                Update your personal information.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                    </button>
+
+                </div>
+
+
+                <!-- Modal Body -->
+
+                <div class="modal-body profile-modal-body">
+
+                    <form th:action="@{/user/updateProfile}"
+                          th:object="${dto}"
+                          enctype="multipart/form-data"
+                          method="post">
+
+                        <input type="hidden"
+                               th:value="${user.Id}"
+                               name="Id">
+
+
+                        <!-- Name -->
+
+                        <div class="profile-form-field">
+
+                            <label for="profileName">
+                                Full Name
+                                <span>*</span>
+                            </label>
+
+                            <div class="profile-modern-input">
+
+                                <i class="fa-solid fa-user"></i>
+
+                                <input
+                                    id="profileName"
+                                    type="text"
+                                    name="name"
+                                    th:value="${user.name}"
+                                    th:classappend="${#fields.hasErrors('name')}
+                                        ? 'profile-input-error' : ''"
+                                    placeholder="Enter your full name">
+
+                            </div>
+
+                            <div class="profile-field-error"
+                                 th:each="e : ${#fields.errors('name')}"
+                                 th:text="${e}">
+                            </div>
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="profile-form-field">
+
+                            <label for="profileEmail">
+                                Email Address
+                                <span>*</span>
+                            </label>
+
+                            <div class="profile-modern-input">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <input
+                                    id="profileEmail"
+                                    type="email"
+                                    name="email"
+                                    th:value="${user.email}"
+                                    th:classappend="${#fields.hasErrors('email')}
+                                        ? 'profile-input-error' : ''"
+                                    placeholder="Enter your email">
+
+                            </div>
+
+                            <div class="profile-field-error"
+                                 th:each="e : ${#fields.errors('email')}"
+                                 th:text="${e}">
+                            </div>
+
+                        </div>
+
+
+                        <!-- Image -->
+
+                        <div class="profile-form-field">
+
+                            <label for="profileImage">
+                                Profile Picture
+                            </label>
+
+                            <div class="profile-image-upload">
+
+                                <div class="profile-current-image">
+
+                                    <img
+                                        th:src="@{/images/{image}(image=${user.imageUrl})}"
+                                        alt="Current Profile">
+
+                                </div>
+
+                                <div class="profile-upload-content">
+
+                                    <label for="profileImage"
+                                           class="profile-upload-label">
+
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                                        Choose New Image
+
+                                    </label>
+
+                                    <p>
+                                        JPG, JPEG or PNG
+                                    </p>
+
+                                    <input
+                                        id="profileImage"
+                                        type="file"
+                                        name="imageUrl"
+                                        accept="image/png,image/jpeg,image/jpg">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- About -->
+
+                        <div class="profile-form-field">
+
+                            <label for="mytextarea">
+                                About Me
+                            </label>
+
+                            <div class="profile-textarea-wrapper">
+
+                                <i class="fa-solid fa-align-left"></i>
+
+                                <textarea
+                                    id="mytextarea"
+                                    name="about"
+                                    rows="5"
+                                    th:text="${user.about}"
+                                    th:classappend="${#fields.hasErrors('about')}
+                                        ? 'profile-input-error' : ''"
+                                    placeholder="Tell something about yourself..."></textarea>
+
+                            </div>
+
+                            <div class="profile-field-error"
+                                 th:each="e : ${#fields.errors('about')}"
+                                 th:text="${e}">
+                            </div>
+
+                        </div>
+
+
+                        <!-- Buttons -->
+
+                        <div class="profile-modal-actions">
+
+                            <button type="button"
+                                    class="profile-cancel-btn"
+                                    data-bs-dismiss="modal">
+
+                                <i class="fa-solid fa-xmark"></i>
+
+                                Cancel
+
+                            </button>
+
+                            <button type="reset"
+                                    class="profile-reset-btn">
+
+                                <i class="fa-solid fa-rotate-left"></i>
+
+                                Reset
+
+                            </button>
+
+                            <button type="submit"
+                                    class="profile-save-btn">
+
+                                <i class="fa-solid fa-floppy-disk"></i>
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         OPEN MODAL AFTER VALIDATION ERROR
+    ====================================================== -->
+
+    <input type="hidden"
+           id="profileOpenerValue"
+           th:value="${openProfileModal}">
+
+
+    <script th:inline="javascript">
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const modalElement =
+                document.getElementById("staticBackdrop");
+
+            const opener =
+                document.getElementById("profileOpenerValue");
+
+            if (modalElement && opener && opener.value === "true") {
+
+                const profileModal =
+                    bootstrap.Modal.getOrCreateInstance(modalElement);
+
+                profileModal.show();
+            }
+
+        });
+
+    </script>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<section class="login-page">
+
+    <div class="login-background">
+
+        <div class="login-container">
+
+            <!-- ================= LEFT SIDE ================= -->
+
+            <div class="login-info">
+
+                <div class="login-brand-icon">
+                    <i class="bi bi-person-lines-fill"></i>
+                </div>
+
+                <span class="login-small-title">
+                    SMARTER CONTACT MANAGEMENT
+                </span>
+
+                <h1>
+                    Welcome
+                    <span>Back!</span>
+                </h1>
+
+                <p>
+                    Sign in to manage your contacts, keep your
+                    connections organized and access everything
+                    from one place.
+                </p>
+
+                <div class="login-benefits">
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Manage your contacts easily</span>
+                    </div>
+
+                    <div>
+                        <i class="bi bi-shield-check"></i>
+                        <span>Secure and organized</span>
+                    </div>
+
+                    <div>
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        <span>Fast and simple experience</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= LOGIN CARD ================= -->
+
+            <div class="login-card">
+
+                <div class="login-card-header">
+
+                    <div class="login-icon">
+
+                        <i class="bi bi-person-circle"></i>
+
+                    </div>
+
+                    <h2>
+                        Sign In
+                    </h2>
+
+                    <p>
+                        Enter your details to continue
+                    </p>
+
+                </div>
+
+
+                <!-- ================= ALERTS ================= -->
+
+                <div th:if="${param.error}"
+                     class="login-alert login-alert-danger">
+
+                    <i class="bi bi-exclamation-circle-fill"></i>
+
+                    <span>
+                        Invalid username and password.
+                    </span>
+
+                </div>
+
+
+                <div th:if="${param.logout}"
+                     class="login-alert login-alert-success">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    <span>
+                        You have been logged out successfully.
+                    </span>
+
+                </div>
+
+
+                <div th:if="${param.changed}"
+                     class="login-alert login-alert-success">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    <span>
+                        Password changed successfully.
+                    </span>
+
+                </div>
+
+
+                <!-- Dynamic message -->
+
+                <div th:if="${message != null}"
+                     class="login-message">
+
+                    <div th:class="'alert alert-' + ${message.type}"
+                         role="alert"
+                         th:utext="${message.content}">
+                    </div>
+
+                </div>
+
+
+                <!-- ================= LOGIN FORM ================= -->
+
+                <form th:action="@{/dologin}"
+                      method="post"
+                      class="login-form">
+
+
+                    <!-- Email -->
+
+                    <div class="login-input-group">
+
+                        <label for="login">
+
+                            <i class="bi bi-envelope"></i>
+
+                            Email Address
+
+                        </label>
+
+                        <div class="login-input-wrapper">
+
+                            <i class="bi bi-envelope input-icon"></i>
+
+                            <input
+                                type="text"
+                                id="login"
+                                name="username"
+                                placeholder="Enter your email"
+                                autocomplete="username"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="login-input-group">
+
+                        <div class="password-label-row">
+
+                            <label for="password">
+
+                                <i class="bi bi-lock"></i>
+
+                                Password
+
+                            </label>
+
+                            <a th:href="@{/forgot}"
+                               class="forgot-link">
+
+                                Forgot password?
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="login-input-wrapper">
+
+                            <i class="bi bi-lock input-icon"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()"
+                                aria-label="Show password">
+
+                                <i class="bi bi-eye"
+                                   id="passwordIcon"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button type="submit"
+                            class="login-submit-btn">
+
+                        <span>
+                            Sign In
+                        </span>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </form>
+
+
+                <!-- ================= REGISTER ================= -->
+
+                <div class="login-divider">
+
+                    <span>OR</span>
+
+                </div>
+
+
+                <div class="register-section">
+
+                    <p>
+                        Don't have an account?
+                    </p>
+
+                    <a th:href="@{/signup}"
+                       class="register-link">
+
+                        Create an account
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PASSWORD SCRIPT ================= -->
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const icon =
+                document.getElementById("passwordIcon");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("bi-eye");
+
+                icon.classList.add("bi-eye-slash");
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove("bi-eye-slash");
+
+                icon.classList.add("bi-eye");
+
+            }
+
+        }
+
+    </script>
+
+</section>
+
+</body>
+
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="user/base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<section>
+
+    <div class="settings-page">
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="settings-page-header">
+
+            <div>
+                <span class="settings-eyebrow">
+                    ACCOUNT SETTINGS
+                </span>
+
+                <h2 class="settings-title">
+                    Security Settings
+                </h2>
+
+                <p class="settings-subtitle">
+                    Manage your account password and keep your account secure.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SETTINGS LAYOUT
+        ================================================== -->
+
+        <div class="settings-layout">
+
+            <!-- LEFT SIDE -->
+            <div class="settings-sidebar">
+
+                <div class="settings-menu-card">
+
+                    <div class="settings-menu-title">
+                        Settings
+                    </div>
+
+                    <div class="settings-menu-item active">
+
+                        <div class="settings-menu-icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <div>
+                            <strong>Change Password</strong>
+                            <span>Update your password</span>
+                        </div>
+
+                    </div>
+
+                    <a th:href="@{/user/profile}"
+                       class="settings-menu-item">
+
+                        <div class="settings-menu-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+                            <strong>Profile</strong>
+                            <span>Manage your profile</span>
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Security Card -->
+
+                <div class="settings-security-card">
+
+                    <div class="security-card-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <h5>
+                        Account Security
+                    </h5>
+
+                    <p>
+                        Use a strong password that you don't use on
+                        other websites or applications.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="settings-content">
+
+                <div class="change-password-card">
+
+                    <!-- Card Header -->
+
+                    <div class="change-password-header">
+
+                        <div class="password-header-icon">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+
+                        <div>
+
+                            <h4>
+                                Change Password
+                            </h4>
+
+                            <p>
+                                Enter your current password and choose
+                                a new secure password.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <!-- Password Form -->
+
+                    <form th:action="@{/user/changePassword}"
+                          method="post"
+                          id="changePasswordForm">
+
+
+                        <!-- Old Password -->
+
+                        <div class="settings-form-field">
+
+                            <label for="oldPassword">
+                                Current Password
+                                <span>*</span>
+                            </label>
+
+                            <div class="settings-password-input">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="oldPassword"
+                                    name="oldPassword"
+                                    placeholder="Enter your current password"
+                                    autocomplete="current-password">
+
+                                <button type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('oldPassword', this)"
+                                        aria-label="Show password">
+
+                                    <i class="fa-solid fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- New Password -->
+
+                        <div class="settings-form-field">
+
+                            <label for="newPassowrd">
+                                New Password
+                                <span>*</span>
+                            </label>
+
+                            <div class="settings-password-input">
+
+                                <i class="fa-solid fa-key"></i>
+
+                                <input
+                                    type="password"
+                                    id="newPassowrd"
+                                    name="newPassowrd"
+                                    placeholder="Enter your new password"
+                                    autocomplete="new-password"
+                                    oninput="checkPasswordStrength(this.value)">
+
+                                <button type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('newPassowrd', this)"
+                                        aria-label="Show password">
+
+                                    <i class="fa-solid fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+
+                            <!-- Password Strength -->
+
+                            <div class="password-strength-wrapper">
+
+                                <div class="password-strength-bar">
+
+                                    <span id="strengthBar"></span>
+
+                                </div>
+
+                                <span id="strengthText">
+                                    Enter a new password
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Confirm Password -->
+
+                        <div class="settings-form-field">
+
+                            <label for="confirmNewPassword">
+                                Confirm New Password
+                                <span>*</span>
+                            </label>
+
+                            <div class="settings-password-input">
+
+                                <i class="fa-solid fa-shield-check"></i>
+
+                                <input
+                                    type="password"
+                                    id="confirmNewPassword"
+                                    name="confirmNewPassword"
+                                    placeholder="Confirm your new password"
+                                    autocomplete="new-password"
+                                    oninput="checkPasswordMatch()">
+
+                                <button type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('confirmNewPassword', this)"
+                                        aria-label="Show password">
+
+                                    <i class="fa-solid fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                            <div id="passwordMatchMessage"
+                                 class="password-match-message">
+                            </div>
+
+                        </div>
+
+
+                        <!-- Password Rules -->
+
+                        <div class="password-rules">
+
+                            <div class="rules-header">
+
+                                <i class="fa-solid fa-circle-info"></i>
+
+                                <strong>
+                                    Password requirements
+                                </strong>
+
+                            </div>
+
+                            <div class="rules-grid">
+
+                                <div id="ruleLength">
+                                    <i class="fa-solid fa-circle"></i>
+                                    At least 8 characters
+                                </div>
+
+                                <div id="ruleUpper">
+                                    <i class="fa-solid fa-circle"></i>
+                                    One uppercase letter
+                                </div>
+
+                                <div id="ruleLower">
+                                    <i class="fa-solid fa-circle"></i>
+                                    One lowercase letter
+                                </div>
+
+                                <div id="ruleNumber">
+                                    <i class="fa-solid fa-circle"></i>
+                                    One number
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Actions -->
+
+                        <div class="settings-form-actions">
+
+                            <button type="reset"
+                                    class="settings-reset-btn"
+                                    onclick="resetPasswordForm()">
+
+                                <i class="fa-solid fa-rotate-left"></i>
+
+                                Reset
+
+                            </button>
+
+                            <button type="submit"
+                                    class="settings-save-btn">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                Change Password
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- Bottom Information -->
+
+                <div class="password-security-note">
+
+                    <div class="password-note-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Protect your account
+                        </strong>
+
+                        <p>
+                            Never share your password with anyone.
+                            Smarter Contact Management will never ask
+                            you for your password through email or chat.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PASSWORD JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        function togglePassword(inputId, button) {
+
+            const input = document.getElementById(inputId);
+
+            const icon = button.querySelector("i");
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+
+            } else {
+
+                input.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+
+            }
+        }
+
+
+        function checkPasswordStrength(password) {
+
+            const strengthBar =
+                document.getElementById("strengthBar");
+
+            const strengthText =
+                document.getElementById("strengthText");
+
+
+            const ruleLength =
+                document.getElementById("ruleLength");
+
+            const ruleUpper =
+                document.getElementById("ruleUpper");
+
+            const ruleLower =
+                document.getElementById("ruleLower");
+
+            const ruleNumber =
+                document.getElementById("ruleNumber");
+
+
+            let score = 0;
+
+
+            if (password.length >= 8) {
+
+                score++;
+
+                ruleLength.classList.add("rule-valid");
+
+            } else {
+
+                ruleLength.classList.remove("rule-valid");
+
+            }
+
+
+            if (/[A-Z]/.test(password)) {
+
+                score++;
+
+                ruleUpper.classList.add("rule-valid");
+
+            } else {
+
+                ruleUpper.classList.remove("rule-valid");
+
+            }
+
+
+            if (/[a-z]/.test(password)) {
+
+                score++;
+
+                ruleLower.classList.add("rule-valid");
+
+            } else {
+
+                ruleLower.classList.remove("rule-valid");
+
+            }
+
+
+            if (/[0-9]/.test(password)) {
+
+                score++;
+
+                ruleNumber.classList.add("rule-valid");
+
+            } else {
+
+                ruleNumber.classList.remove("rule-valid");
+
+            }
+
+
+            strengthBar.style.width = (score * 25) + "%";
+
+
+            if (password.length === 0) {
+
+                strengthText.textContent =
+                    "Enter a new password";
+
+            } else if (score <= 1) {
+
+                strengthText.textContent =
+                    "Weak password";
+
+            } else if (score === 2 || score === 3) {
+
+                strengthText.textContent =
+                    "Medium password";
+
+            } else {
+
+                strengthText.textContent =
+                    "Strong password";
+
+            }
+
+
+            checkPasswordMatch();
+        }
+
+
+        function checkPasswordMatch() {
+
+            const password =
+                document.getElementById("newPassowrd").value;
+
+            const confirmPassword =
+                document.getElementById("confirmNewPassword").value;
+
+            const message =
+                document.getElementById("passwordMatchMessage");
+
+
+            if (confirmPassword.length === 0) {
+
+                message.textContent = "";
+
+                message.className =
+                    "password-match-message";
+
+                return;
+            }
+
+
+            if (password === confirmPassword) {
+
+                message.innerHTML =
+                    '<i class="fa-solid fa-circle-check"></i> Passwords match';
+
+                message.className =
+                    "password-match-message match-success";
+
+            } else {
+
+                message.innerHTML =
+                    '<i class="fa-solid fa-circle-xmark"></i> Passwords do not match';
+
+                message.className =
+                    "password-match-message match-error";
+            }
+        }
+
+
+        function resetPasswordForm() {
+
+            setTimeout(function () {
+
+                document.getElementById("strengthBar")
+                    .style.width = "0%";
+
+                document.getElementById("strengthText")
+                    .textContent = "Enter a new password";
+
+                document.getElementById("passwordMatchMessage")
+                    .textContent = "";
+
+                document.querySelectorAll(".rule-valid")
+                    .forEach(function (element) {
+
+                        element.classList.remove("rule-valid");
+
+                    });
+
+            }, 0);
+        }
+
+    </script>
+
+</section>
+
+</body>
+</html>

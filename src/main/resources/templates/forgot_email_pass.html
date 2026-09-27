@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<section class="forgot-page">
+
+    <div class="forgot-background">
+
+        <div class="forgot-container">
+
+
+            <!-- ================= LEFT SIDE ================= -->
+
+            <div class="forgot-info">
+
+                <div class="forgot-brand-icon">
+
+                    <i class="bi bi-shield-lock-fill"></i>
+
+                </div>
+
+
+                <span class="forgot-small-title">
+                    ACCOUNT RECOVERY
+                </span>
+
+
+                <h1>
+                    Forgot your
+                    <span>password?</span>
+                </h1>
+
+
+                <p>
+                    Don't worry. Enter the email address associated
+                    with your account and we'll send you an OTP to
+                    securely reset your password.
+                </p>
+
+
+                <div class="forgot-steps">
+
+                    <div class="forgot-step">
+
+                        <span>01</span>
+
+                        <div>
+
+                            <strong>
+                                Enter your email
+                            </strong>
+
+                            <small>
+                                Use the email registered with your account.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="forgot-step">
+
+                        <span>02</span>
+
+                        <div>
+
+                            <strong>
+                                Verify OTP
+                            </strong>
+
+                            <small>
+                                Enter the OTP sent to your email.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="forgot-step">
+
+                        <span>03</span>
+
+                        <div>
+
+                            <strong>
+                                Reset password
+                            </strong>
+
+                            <small>
+                                Create a new password and continue.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= FORGOT CARD ================= -->
+
+            <div class="forgot-card">
+
+
+                <div class="forgot-card-header">
+
+                    <div class="forgot-icon">
+
+                        <i class="bi bi-key-fill"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Reset Password
+                    </h2>
+
+
+                    <p>
+                        Enter your email to receive an OTP
+                    </p>
+
+                </div>
+
+
+                <!-- ================= MESSAGE ================= -->
+
+                <div th:if="${message != null}"
+                     class="forgot-message">
+
+                    <div th:class="'alert alert-' + ${message.type}"
+                         role="alert"
+                         th:utext="${message.content}">
+                    </div>
+
+                </div>
+
+
+                <!-- ================= FORM ================= -->
+
+                <form th:action="@{/sendOtp}"
+                      method="post"
+                      class="forgot-form">
+
+
+                    <div class="forgot-input-group">
+
+                        <label for="email">
+
+                            <i class="bi bi-envelope"></i>
+
+                            Email Address
+
+                        </label>
+
+
+                        <div class="forgot-input-wrapper">
+
+                            <i class="bi bi-envelope input-icon"></i>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your registered email"
+                                autocomplete="email"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button type="submit"
+                            class="forgot-submit-btn">
+
+                        <span>
+                            Send OTP
+                        </span>
+
+                        <i class="bi bi-send"></i>
+
+                    </button>
+
+                </form>
+
+
+                <!-- Security note -->
+
+                <div class="forgot-security">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <div>
+
+                        <strong>
+                            Secure account recovery
+                        </strong>
+
+                        <p>
+                            We'll use your registered email
+                            only for password recovery.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= LINKS ================= -->
+
+                <div class="forgot-divider">
+
+                    <span>OR</span>
+
+                </div>
+
+
+                <div class="forgot-links">
+
+                    <a th:href="@{/signin}">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Back to Login
+
+                    </a>
+
+
+                    <span>•</span>
+
+
+                    <a th:href="@{/signup}">
+
+                        Create Account
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

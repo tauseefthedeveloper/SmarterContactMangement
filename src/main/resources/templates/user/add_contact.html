@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="user/base::layout(~{::section})">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet"
+          th:href="@{/css/User CSS/UserCss.css}">
+
+</head>
+
+
+<body>
+
+<section>
+
+    <div class="add-contact-page">
+
+
+        <!-- ================= PAGE HEADER ================= -->
+
+        <div class="add-contact-header">
+
+            <div>
+
+                <span class="contacts-eyebrow">
+                    CONTACT MANAGEMENT
+                </span>
+
+                <h2 class="contacts-title">
+                    Add New Contact
+                </h2>
+
+                <p class="contacts-subtitle">
+                    Save important contact information in one secure place.
+                </p>
+
+            </div>
+
+
+            <a th:href="@{/user/showContact/0}"
+               class="back-contacts-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                View Contacts
+
+            </a>
+
+        </div>
+
+
+        <!-- ================= FORM CARD ================= -->
+
+        <div class="add-contact-card">
+
+
+            <!-- Form Header -->
+
+            <div class="form-card-header">
+
+                <div class="form-header-icon">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Contact Information
+                    </h4>
+
+                    <p>
+                        Enter the details of the person you want to save.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-divider"></div>
+
+
+            <!-- ================= FORM ================= -->
+
+            <form
+                th:action="@{/user/processContact}"
+                th:object="${contact}"
+                enctype="multipart/form-data"
+                method="post">
+
+
+                <!-- ================= BASIC INFORMATION ================= -->
+
+                <div class="form-section-title">
+
+                    <span class="form-section-number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h5>
+                            Basic Information
+                        </h5>
+
+                        <p>
+                            Tell us who this contact is.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-field">
+
+                        <label for="name">
+                            Full Name
+                            <span>*</span>
+                        </label>
+
+                        <div class="modern-input">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                th:value="${contact.name}"
+                                th:classappend="${#fields.hasErrors('name')} ? 'input-error' : ''"
+                                placeholder="Enter full name">
+
+                        </div>
+
+
+                        <div
+                            class="field-error"
+                            th:each="e : ${#fields.errors('name')}"
+                            th:text="${e}">
+                        </div>
+
+                    </div>
+
+
+                    <!-- NICKNAME -->
+
+                    <div class="form-field">
+
+                        <label for="nickname">
+                            Nickname
+                        </label>
+
+                        <div class="modern-input">
+
+                            <i class="fa-solid fa-id-badge"></i>
+
+                            <input
+                                id="nickname"
+                                type="text"
+                                name="NickName"
+                                placeholder="Enter nickname">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- WORK -->
+
+                    <div class="form-field">
+
+                        <label for="work">
+                            Work / Profession
+                        </label>
+
+                        <div class="modern-input">
+
+                            <i class="fa-solid fa-briefcase"></i>
+
+                            <input
+                                id="work"
+                                type="text"
+                                name="work"
+                                placeholder="e.g. Software Engineer">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-field">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="modern-input">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                placeholder="example@email.com">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-field">
+
+                        <label for="phone">
+                            Phone Number
+                            <span>*</span>
+                        </label>
+
+                        <div class="modern-input">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            <input
+                                id="phone"
+                                type="tel"
+                                name="phone"
+                                th:value="${contact.phone}"
+                                th:classappend="${#fields.hasErrors('phone')} ? 'input-error' : ''"
+                                placeholder="Enter phone number"
+                                autocomplete="tel">
+
+                        </div>
+
+
+                        <div
+                            class="field-error"
+                            th:each="e : ${#fields.errors('phone')}"
+                            th:text="${e}">
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================= PROFILE IMAGE ================= -->
+
+                <div class="form-section-title image-section-title">
+
+                    <span class="form-section-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h5>
+                            Profile Picture
+                        </h5>
+
+                        <p>
+                            Add a picture to easily recognize this contact.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="image-upload-area">
+
+                    <div class="upload-icon">
+
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    </div>
+
+
+                    <div class="upload-content">
+
+                        <label for="profileContact"
+                               class="upload-label">
+
+                            Choose Contact Image
+
+                        </label>
+
+                        <p>
+                            JPG, JPEG or PNG recommended
+                        </p>
+
+                        <input
+                            id="profileContact"
+                            type="file"
+                            name="profileContact"
+                            accept="image/png,image/jpeg,image/jpg">
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= DESCRIPTION ================= -->
+
+                <div class="form-section-title description-section-title">
+
+                    <span class="form-section-number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <h5>
+                            About Contact
+                        </h5>
+
+                        <p>
+                            Add additional information about this person.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="description-wrapper">
+
+                    <div class="description-icon">
+
+                        <i class="fa-solid fa-align-left"></i>
+
+                    </div>
+
+
+                    <textarea
+                        id="mytextarea"
+                        name="description"
+                        rows="6"
+                        th:text="${contact.description}"
+                        th:classappend="${#fields.hasErrors('description')} ? 'input-error' : ''"
+                        placeholder="Write something about this contact..."></textarea>
+
+                </div>
+
+
+                <div
+                    class="field-error description-error"
+                    th:each="e : ${#fields.errors('description')}"
+                    th:text="${e}">
+                </div>
+
+
+                <!-- ================= FORM ACTIONS ================= -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="reset"
+                        class="reset-contact-btn">
+
+                        <i class="fa-solid fa-rotate-left"></i>
+
+                        Reset
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-contact-btn">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Save Contact
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- ================= SECURITY NOTE ================= -->
+
+        <div class="contact-security-note">
+
+            <div class="security-note-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Your information is protected
+                </strong>
+
+                <p>
+                    Your contact information is stored securely
+                    and is only accessible from your account.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= CKEDITOR ================= -->
+
+    <script
+        src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js">
+    </script>
+
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const textarea =
+                document.querySelector('#mytextarea');
+
+            if (textarea) {
+
+                ClassicEditor
+                    .create(textarea)
+                    .catch(error => {
+
+                        console.error(error);
+
+                    });
+
+            }
+
+        });
+
+    </script>
+
+
+</section>
+
+</body>
+
+</html>

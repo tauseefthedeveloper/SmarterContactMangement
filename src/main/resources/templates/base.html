@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(content)">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${title != null ? title + ' | Smarter Contact Management' : 'Smarter Contact Management'}">
+        Smarter Contact Management
+    </title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/css.css}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg modern-navbar">
+
+    <div class="container">
+
+        <!-- Brand -->
+
+        <a class="navbar-brand d-flex align-items-center"
+           th:href="@{/}">
+
+            <span class="brand-logo">
+                <i class="bi bi-person-lines-fill"></i>
+            </span>
+
+            <span class="brand-text">
+                Smarter Contact
+            </span>
+
+        </a>
+
+
+        <!-- Mobile button -->
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- Navigation -->
+
+        <div class="collapse navbar-collapse"
+             id="mainNavbar">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       th:href="@{/}">
+
+                        <i class="bi bi-house-door me-1"></i>
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       th:href="@{/about}">
+
+                        <i class="bi bi-info-circle me-1"></i>
+                        About
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       th:href="@{/signin}">
+
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        Login
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="signup-btn"
+                       th:href="@{/signup}">
+
+                        <i class="bi bi-person-plus me-1"></i>
+                        Sign Up
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main th:replace="${content}">
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="modern-footer">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <!-- Brand -->
+
+            <div class="col-lg-5 col-md-6">
+
+                <div class="footer-brand">
+
+                    <div class="d-flex align-items-center mb-3">
+
+                        <span class="footer-logo">
+                            <i class="bi bi-person-lines-fill"></i>
+                        </span>
+
+                        <h5 class="mb-0">
+                            Smarter Contact
+                        </h5>
+
+                    </div>
+
+                    <p>
+                        Manage your contacts smarter, faster and more
+                        securely. Keep your important connections
+                        organized and accessible anytime.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Quick Links -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h6 class="footer-title">
+                    Quick Links
+                </h6>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a th:href="@{/}">
+                            <i class="bi bi-chevron-right"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/about}">
+                            <i class="bi bi-chevron-right"></i>
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/signin}">
+                            <i class="bi bi-chevron-right"></i>
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/signup}">
+                            <i class="bi bi-chevron-right"></i>
+                            Sign Up
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Social -->
+
+            <div class="col-lg-4 col-md-12">
+
+                <h6 class="footer-title">
+                    Connect With Us
+                </h6>
+
+                <p class="footer-social-text">
+                    Follow us on social media.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="#"
+                       aria-label="Facebook">
+
+                        <i class="bi bi-facebook"></i>
+
+                    </a>
+
+                    <a href="#"
+                       aria-label="Instagram">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+                    <a href="#"
+                       aria-label="Twitter">
+
+                        <i class="bi bi-twitter-x"></i>
+
+                    </a>
+
+                    <a href="https://github.com/tauseefthedeveloper"
+                       aria-label="GitHub">
+
+                        <i class="bi bi-github"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer bottom -->
+
+        <div class="footer-bottom">
+
+            <p class="mb-0">
+
+                © 2026 Smarter Contact Management
+
+                
+
+             
+               
+
+            </p>
+            <span class="footer-separator">|</span>
+
+            <p class="mb-0">
+                Design by <span class="heart">♥ <a href="https://github.com/tauseefthedeveloper"> <strong>Tauseef Khan</strong></a></span>
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= SCRIPTS ================= -->
+
+<script th:src="@{/js/script.js}"></script>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+
+</html>

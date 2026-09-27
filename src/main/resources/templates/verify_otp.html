@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+</head>
+
+<body>
+
+<section class="otp-page">
+
+    <div class="otp-background">
+
+        <div class="otp-container">
+
+            <!-- LEFT SIDE -->
+            <div class="otp-info">
+
+                <div class="otp-info-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
+
+                <span class="otp-badge">
+                    <i class="bi bi-patch-check-fill"></i>
+                    Secure Verification
+                </span>
+
+                <h1>
+                    Verify Your<br>
+                    <span>OTP.</span>
+                </h1>
+
+                <p>
+                    We've sent a one-time password to your registered email.
+                    Enter the OTP to securely continue with your account.
+                </p>
+
+                <div class="otp-benefits">
+
+                    <div class="otp-benefit">
+                        <div class="benefit-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <div>
+                            <strong>Secure Verification</strong>
+                            <small>Your account stays protected</small>
+                        </div>
+                    </div>
+
+                    <div class="otp-benefit">
+                        <div class="benefit-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+
+                        <div>
+                            <strong>One-Time Password</strong>
+                            <small>OTP can only be used once</small>
+                        </div>
+                    </div>
+
+                    <div class="otp-benefit">
+                        <div class="benefit-icon">
+                            <i class="bi bi-lock-fill"></i>
+                        </div>
+
+                        <div>
+                            <strong>Private & Safe</strong>
+                            <small>Your information remains protected</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <div class="otp-card">
+
+                <div class="otp-card-header">
+
+                    <div class="otp-icon">
+                        <i class="bi bi-key-fill"></i>
+                    </div>
+
+                    <h2>Verify OTP</h2>
+
+                    <p>
+                        Enter the OTP sent to your registered email address.
+                    </p>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+                <div th:if="${message != null}"
+                     class="otp-message">
+
+                    <div th:class="'alert alert-' + ${message.type}"
+                         role="alert">
+
+                        <i class="bi bi-info-circle-fill me-2"></i>
+
+                        <span th:text="${message.content}"></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+                <form th:action="@{/verifyOtp}"
+                      method="post"
+                      class="otp-form">
+
+                    <div class="otp-input-group">
+
+                        <label for="otp">
+                            Enter OTP
+                        </label>
+
+                        <div class="otp-input-wrapper">
+
+                            <i class="bi bi-shield-lock otp-input-icon"></i>
+
+                            <input
+                                type="text"
+                                id="otp"
+                                name="otp"
+                                placeholder="Enter OTP here"
+                                maxlength="6"
+                                inputmode="numeric"
+                                autocomplete="one-time-code"
+                                required>
+
+                        </div>
+
+                        <small class="otp-help">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Enter the 6-digit OTP sent to your email.
+                        </small>
+
+                    </div>
+
+
+                    <button type="submit"
+                            class="otp-submit-btn">
+
+                        <i class="bi bi-check2-circle me-2"></i>
+
+                        Verify OTP
+
+                    </button>
+
+                </form>
+
+
+                <div class="otp-security">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <span>
+                        Never share your OTP with anyone.
+                    </span>
+
+                </div>
+
+
+                <div class="otp-footer">
+
+                    <i class="bi bi-clock me-1"></i>
+
+                    OTP verification keeps your account secure.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="user/base::layout(~{::section})">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet"
+          th:href="@{/css/User CSS/UserCss.css}">
+
+</head>
+
+
+<body>
+
+<section>
+
+    <!-- ================= CONTACTS PAGE ================= -->
+
+    <div class="contacts-page">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="contacts-header">
+
+            <div>
+
+                <span class="contacts-eyebrow">
+                    CONTACT MANAGEMENT
+                </span>
+
+                <h2 class="contacts-title">
+                    My Contacts
+                </h2>
+
+                <p class="contacts-subtitle">
+                    View, search and manage all your saved contacts.
+                </p>
+
+            </div>
+
+
+            <a th:href="@{/user/addContact}"
+               class="add-contact-btn">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Add Contact
+
+            </a>
+
+        </div>
+
+
+        <!-- ================= TOOLBAR ================= -->
+
+        <div class="contacts-toolbar">
+
+            <div class="contacts-count">
+
+                <div class="contacts-count-icon">
+
+                    <i class="fa-solid fa-address-book"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="contacts-count-label">
+                        Your Contacts
+                    </span>
+
+                    <strong
+                        th:text="${contacts != null ? contacts.totalElements : 0}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Search -->
+
+            <div class="contact-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    onkeyup="search()"
+                    id="searchInput"
+                    type="text"
+                    name="searchInput"
+                    placeholder="Search contacts...">
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SEARCH RESULT ================= -->
+
+        <div class="search-result"></div>
+
+
+        <!-- ================= CONTACT TABLE ================= -->
+
+        <div class="contacts-card">
+
+            <div class="table-responsive">
+
+                <table class="contacts-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="id-column">
+                                ID
+                            </th>
+
+                            <th>
+                                CONTACT
+                            </th>
+
+                            <th>
+                                NICKNAME
+                            </th>
+
+                            <th>
+                                PHONE
+                            </th>
+
+                            <th>
+                                WORK
+                            </th>
+
+                            <th class="action-column">
+                                ACTION
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <!-- ================= CONTACTS AVAILABLE ================= -->
+
+                    <tbody th:if="${contacts}">
+
+                        <tr th:each="c,state : ${contacts}">
+
+
+                            <!-- ID -->
+
+                            <td class="contact-id">
+
+                                <a th:href="@{'/user/'+${c.Cid}+'/contact'}">
+
+                                    <span th:text="${c.Cid}">
+                                        1
+                                    </span>
+
+                                </a>
+
+                            </td>
+
+
+                            <!-- NAME -->
+
+                            <td>
+
+                                <div class="contact-person">
+
+                                    <div class="contact-avatar">
+
+                                        <img
+                                            th:src="@{'/images/'+${c.imageUrl}}"
+                                            alt="Contact">
+
+                                    </div>
+
+
+                                    <div class="contact-details">
+
+                                        <span class="contact-name"
+                                              th:text="${c.name}">
+                                            Contact Name
+                                        </span>
+
+                                        <span class="contact-email"
+                                              th:text="${c.email}">
+                                            email@example.com
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- NICKNAME -->
+
+                            <td>
+
+                                <span class="nickname-badge"
+                                      th:text="${c.NickName}">
+                                    Nickname
+                                </span>
+
+                            </td>
+
+
+                            <!-- PHONE -->
+
+                            <td>
+
+                                <div class="phone-info">
+
+                                    <i class="fa-solid fa-phone"></i>
+
+                                    <span th:text="${c.phone}">
+                                        9876543210
+                                    </span>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- WORK -->
+
+                            <td>
+
+                                <span class="work-text"
+                                      th:text="${c.work}">
+                                    Software Engineer
+                                </span>
+
+                            </td>
+
+
+                            <!-- ACTION -->
+
+                            <td>
+
+                                <div class="contact-actions">
+
+
+                                    <!-- VIEW -->
+
+                                    <a
+                                        th:href="@{'/user/'+${c.Cid}+'/contact'}"
+                                        class="contact-action view-action"
+                                        title="View">
+
+                                        <i class="fa-solid fa-eye"></i>
+
+                                    </a>
+
+
+                                    <!-- EDIT -->
+
+                                    <form
+                                        th:action="@{/user/editContact/{cid}(cid=${c.Cid})}"
+                                        method="post">
+
+                                        <button
+                                            type="submit"
+                                            class="contact-action edit-action"
+                                            title="Edit">
+
+                                            <i class="fa-solid fa-pen"></i>
+
+                                        </button>
+
+                                    </form>
+
+
+                                    <!-- DELETE -->
+
+                                    <a
+                                        th:href="@{/user/deleteContact/{cid}(cid=${c.Cid}, page=${currentPage})}"
+                                        class="contact-action delete-action"
+                                        title="Delete"
+                                        onclick="return confirm('Are you sure you want to delete this contact?');">
+
+                                        <i class="fa-solid fa-trash"></i>
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+
+                        </tr>
+
+
+                        <!-- ================= NO CONTACTS ================= -->
+
+                        <tr th:if="${contacts.empty}">
+
+                            <td colspan="6">
+
+                                <div class="empty-contacts">
+
+                                    <div class="empty-icon">
+
+                                        <i class="fa-solid fa-address-book"></i>
+
+                                    </div>
+
+                                    <h4>
+                                        No contacts yet
+                                    </h4>
+
+                                    <p>
+                                        You haven't added any contacts.
+                                        Start building your contact list.
+                                    </p>
+
+                                    <a th:href="@{/user/addContact}"
+                                       class="empty-add-btn">
+
+                                        <i class="fa-solid fa-user-plus"></i>
+
+                                        Add Your First Contact
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- ================= PAGINATION FILL ================= -->
+
+                        <tr
+                            th:if="${contacts.last}"
+                            th:each="i : ${#numbers.sequence(1, contacts.size - contacts.numberOfElements)}">
+
+                            <td colspan="6"
+                                class="empty-row">
+                                &nbsp;
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                    <!-- ================= NO CONTACT DATA ================= -->
+
+                    <tbody th:unless="${contacts}">
+
+                        <tr>
+
+                            <td colspan="6">
+
+                                <div class="empty-contacts">
+
+                                    <div class="empty-icon">
+
+                                        <i class="fa-solid fa-address-book"></i>
+
+                                    </div>
+
+                                    <h4>
+                                        No contacts available
+                                    </h4>
+
+                                    <p>
+                                        Please add a contact to get started.
+                                    </p>
+
+                                    <a th:href="@{/user/addContact}"
+                                       class="empty-add-btn">
+
+                                        <i class="fa-solid fa-user-plus"></i>
+
+                                        Add Contact
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+            <!-- ================= PAGINATION ================= -->
+
+            <div class="contacts-pagination"
+                 th:if="${totalPages > 1}">
+
+                <div class="pagination-info">
+
+                    Page
+
+                    <strong th:text="${currentPage + 1}">
+                        1
+                    </strong>
+
+                    of
+
+                    <strong th:text="${totalPages}">
+                        5
+                    </strong>
+
+                </div>
+
+
+                <nav aria-label="Contacts pagination">
+
+                    <ul class="modern-pagination">
+
+
+                        <!-- PREVIOUS -->
+
+                        <li
+                            th:classappend="${currentPage == 0} ? 'disabled' : ''">
+
+                            <a
+                                th:href="@{'/user/showContact/' + ${currentPage - 1}}"
+                                class="pagination-btn">
+
+                                <i class="fa-solid fa-chevron-left"></i>
+
+                                Previous
+
+                            </a>
+
+                        </li>
+
+
+                        <!-- PAGE NUMBERS -->
+
+                        <li
+                            th:each="i : ${#numbers.sequence(1,totalPages)}"
+                            th:classappend="${currentPage == i-1} ? 'active' : ''">
+
+                            <a
+                                th:href="@{'/user/showContact/' + ${i-1}}"
+                                class="pagination-number">
+
+                                <span th:text="${i}">
+                                    1
+                                </span>
+
+                            </a>
+
+                        </li>
+
+
+                        <!-- NEXT -->
+
+                        <li
+                            th:classappend="${currentPage + 1 == totalPages} ? 'disabled' : ''">
+
+                            <a
+                                th:href="@{'/user/showContact/' + ${currentPage + 1}}"
+                                class="pagination-btn">
+
+                                Next
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
+                </nav>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+function search() {
+
+    let query =
+        document.getElementById("searchInput").value;
+
+    console.log("Searching:", query);
+
+}
+
+</script>
+
+</body>
+
+</html>

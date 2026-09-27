@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<section class="home-page">
+
+    <!-- ================= HERO ================= -->
+
+    <div class="hero-section">
+
+        <div class="container">
+
+            <div class="row align-items-center min-vh-100">
+
+                <!-- LEFT CONTENT -->
+
+                <div class="col-lg-7">
+
+                    <div class="hero-content">
+
+                        <div class="hero-badge">
+
+                            <i class="bi bi-stars"></i>
+
+                            Smart Contact Management
+
+                        </div>
+
+
+                        <h1>
+
+                            Manage Your Contacts
+
+                            <span>Smarter.</span>
+
+                        </h1>
+
+
+                        <p class="hero-description">
+
+                            Organize, manage and access all your important
+                            contacts from one simple, secure and powerful
+                            platform.
+
+                        </p>
+
+
+                        <div class="hero-buttons">
+
+                            <a th:href="@{/signup}"
+                               class="btn hero-primary-btn">
+
+                                <i class="bi bi-person-plus me-2"></i>
+
+                                Get Started
+
+                                <i class="bi bi-arrow-right ms-2"></i>
+
+                            </a>
+
+
+                            <a th:href="@{/about}"
+                               class="btn hero-secondary-btn">
+
+                                Learn More
+
+                            </a>
+
+                        </div>
+
+
+                        <!-- Small information -->
+
+                        <div class="hero-info">
+
+                            <div>
+
+                                <i class="bi bi-shield-check"></i>
+
+                                <span>Secure</span>
+
+                            </div>
+
+                            <div>
+
+                                <i class="bi bi-lightning-charge"></i>
+
+                                <span>Fast</span>
+
+                            </div>
+
+                            <div>
+
+                                <i class="bi bi-phone"></i>
+
+                                <span>Responsive</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT VISUAL -->
+
+                <div class="col-lg-5 d-none d-lg-block">
+
+                    <div class="hero-visual">
+
+                        <!-- Decorative circles -->
+
+                        <div class="floating-circle circle-one"></div>
+
+                        <div class="floating-circle circle-two"></div>
+
+
+                        <!-- Main card -->
+
+                        <div class="contact-dashboard-card">
+
+                            <div class="dashboard-header">
+
+                                <div>
+
+                                    <small>
+                                        Contact Dashboard
+                                    </small>
+
+                                    <h5>
+                                        My Contacts
+                                    </h5>
+
+                                </div>
+
+                                <div class="dashboard-icon">
+
+                                    <i class="bi bi-people"></i>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Contact -->
+
+                            <div class="contact-item">
+
+                                <div class="contact-avatar avatar-one">
+                                    A
+                                </div>
+
+                                <div class="contact-details">
+
+                                    <strong>
+                                        Ankit Sharma
+                                    </strong>
+
+                                    <small>
+                                        ankit@example.com
+                                    </small>
+
+                                </div>
+
+                                <i class="bi bi-three-dots"></i>
+
+                            </div>
+
+
+                            <div class="contact-item">
+
+                                <div class="contact-avatar avatar-two">
+                                    R
+                                </div>
+
+                                <div class="contact-details">
+
+                                    <strong>
+                                        Rahul Kumar
+                                    </strong>
+
+                                    <small>
+                                        rahul@example.com
+                                    </small>
+
+                                </div>
+
+                                <i class="bi bi-three-dots"></i>
+
+                            </div>
+
+
+                            <div class="contact-item">
+
+                                <div class="contact-avatar avatar-three">
+                                    P
+                                </div>
+
+                                <div class="contact-details">
+
+                                    <strong>
+                                        Priya Singh
+                                    </strong>
+
+                                    <small>
+                                        priya@example.com
+                                    </small>
+
+                                </div>
+
+                                <i class="bi bi-three-dots"></i>
+
+                            </div>
+
+
+                            <!-- Bottom -->
+
+                            <div class="dashboard-footer">
+
+                                <span>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Contacts organized
+                                </span>
+
+                                <strong>
+                                    128
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features-section">
+
+        <div class="container">
+
+            <div class="section-heading text-center">
+
+                <span>
+                    FEATURES
+                </span>
+
+                <h2>
+                    Everything you need to manage contacts
+                </h2>
+
+                <p>
+                    Simple tools designed to make contact management
+                    easier and more organized.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4 mt-4">
+
+                <!-- Feature 1 -->
+
+                <div class="col-md-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon purple">
+
+                            <i class="bi bi-people"></i>
+
+                        </div>
+
+                        <h4>
+                            Easy Contact Management
+                        </h4>
+
+                        <p>
+                            Add, update, view and manage all your
+                            contacts from one convenient place.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Feature 2 -->
+
+                <div class="col-md-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon blue">
+
+                            <i class="bi bi-shield-lock"></i>
+
+                        </div>
+
+                        <h4>
+                            Secure & Private
+                        </h4>
+
+                        <p>
+                            Keep your contact information organized
+                            with a secure user-focused platform.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Feature 3 -->
+
+                <div class="col-md-4">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon green">
+
+                            <i class="bi bi-lightning-charge"></i>
+
+                        </div>
+
+                        <h4>
+                            Fast & Simple
+                        </h4>
+
+                        <p>
+                            A clean and responsive interface that
+                            helps you manage contacts quickly.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta-section">
+
+        <div class="container">
+
+            <div class="cta-card">
+
+                <div>
+
+                    <h2>
+                        Ready to organize your contacts?
+                    </h2>
+
+                    <p>
+                        Create your account and start managing
+                        your contacts today.
+                    </p>
+
+                </div>
+
+
+                <a th:href="@{/signup}"
+                   class="btn cta-btn">
+
+                    Create Account
+
+                    <i class="bi bi-arrow-right ms-2"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</section>
+
+</body>
+
+</html>

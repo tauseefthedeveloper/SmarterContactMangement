@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="user/base::layout(~{::section})">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/User CSS/UserCss.css}">
+
+</head>
+
+
+<body>
+
+<section>
+
+    <!-- ================= DASHBOARD HERO ================= -->
+
+    <div class="dashboard-hero">
+
+        <div class="hero-content">
+
+            <div class="hero-text">
+
+                <span class="hero-badge">
+                    <i class="fa-solid fa-sparkles"></i>
+                    Welcome Back
+                </span>
+
+                <h2>
+                    Manage Your Contacts
+                    <span class="hero-highlight">
+                        Smarter.
+                    </span>
+                </h2>
+
+                <p>
+                    Keep your important connections organized,
+                    secure and easily accessible from one place.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a th:href="@{/user/addContact}"
+                       class="dashboard-primary-btn">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Add New Contact
+
+                    </a>
+
+
+                    <a th:href="@{/user/showContact/0}"
+                       class="dashboard-secondary-btn">
+
+                        <i class="fa-solid fa-address-book"></i>
+
+                        View Contacts
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-illustration">
+
+                <div class="hero-circle circle-one"></div>
+
+                <div class="hero-circle circle-two"></div>
+
+                <div class="hero-icon">
+
+                    <i class="fa-solid fa-address-book"></i>
+
+                </div>
+
+                <i class="fa-solid fa-user floating-user"></i>
+
+                <i class="fa-solid fa-phone floating-phone"></i>
+
+                <i class="fa-solid fa-envelope floating-mail"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= QUICK STATS ================= -->
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+
+                <i class="fa-solid fa-address-book"></i>
+
+            </div>
+
+            <div class="stat-info">
+
+                <span class="stat-label">
+                    Total Contacts
+                </span>
+
+                <h3>
+                    <span th:text="${totalContacts != null ? totalContacts : 0}">
+                        0
+                    </span>
+                </h3>
+
+                <span class="stat-description">
+                    Contacts in your account
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+            </div>
+
+            <div class="stat-info">
+
+                <span class="stat-label">
+                    Quick Add
+                </span>
+
+                <h3>
+                    +
+                </h3>
+
+                <span class="stat-description">
+                    Add a new connection
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon purple">
+
+                <i class="fa-solid fa-user-shield"></i>
+
+            </div>
+
+            <div class="stat-info">
+
+                <span class="stat-label">
+                    Account
+                </span>
+
+                <h3>
+                    Secure
+                </h3>
+
+                <span class="stat-description">
+                    Your data is protected
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <div class="dashboard-section-header">
+
+        <div>
+
+            <span class="section-label">
+                FEATURES
+            </span>
+
+            <h3>
+                Everything you need
+            </h3>
+
+            <p>
+                Manage your contacts quickly and efficiently.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <!-- ADD CONTACT -->
+
+        <div class="feature-card">
+
+            <div class="feature-top">
+
+                <div class="feature-icon blue-icon">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                </div>
+
+                <span class="feature-number">
+                    01
+                </span>
+
+            </div>
+
+
+            <h5>
+                Add Contacts
+            </h5>
+
+            <p>
+                Store your important contacts with names,
+                phone numbers, emails, images and other
+                useful information.
+            </p>
+
+
+            <a th:href="@{/user/addContact}"
+               class="feature-link">
+
+                Add Contact
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- MANAGE CONTACTS -->
+
+        <div class="feature-card">
+
+            <div class="feature-top">
+
+                <div class="feature-icon green-icon">
+
+                    <i class="fa-solid fa-address-book"></i>
+
+                </div>
+
+                <span class="feature-number">
+                    02
+                </span>
+
+            </div>
+
+
+            <h5>
+                Manage Contacts
+            </h5>
+
+            <p>
+                View, edit, search and delete your contacts
+                whenever you need. Keep everything organized
+                in one place.
+            </p>
+
+
+            <a th:href="@{/user/showContact/0}"
+               class="feature-link green-link">
+
+                View Contacts
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div class="feature-card">
+
+            <div class="feature-top">
+
+                <div class="feature-icon purple-icon">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+                <span class="feature-number">
+                    03
+                </span>
+
+            </div>
+
+
+            <h5>
+                Profile & Security
+            </h5>
+
+            <p>
+                Manage your personal information and keep
+                your account details updated whenever required.
+            </p>
+
+
+            <a th:href="@{/user/profile}"
+               class="feature-link purple-link">
+
+                View Profile
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= BOTTOM INFORMATION ================= -->
+
+    <div class="dashboard-info-card">
+
+        <div class="info-icon">
+
+            <i class="fa-solid fa-lightbulb"></i>
+
+        </div>
+
+
+        <div class="info-content">
+
+            <h5>
+                Keep your contacts organized
+            </h5>
+
+            <p>
+                Add complete information to your contacts so
+                you can find and manage them quickly whenever
+                you need them.
+            </p>
+
+        </div>
+
+
+        <a th:href="@{/user/addContact}"
+           class="info-button">
+
+            Add Contact
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+
+</section>
+
+</body>
+
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<section class="about-page">
+
+    <!-- ================= ABOUT HERO ================= -->
+
+    <section class="about-hero">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <!-- Left -->
+
+                <div class="col-lg-7">
+
+                    <div class="about-hero-content">
+
+                        <span class="about-badge">
+                            <i class="bi bi-info-circle"></i>
+                            About Our Platform
+                        </span>
+
+                        <h1>
+                            Contact management,
+                            <span>made smarter.</span>
+                        </h1>
+
+                        <p>
+                            Smarter Contact Management is a simple and
+                            user-friendly platform designed to help you
+                            organize, manage and access your contacts
+                            efficiently.
+                        </p>
+
+                        <div class="about-buttons">
+
+                            <a th:href="@{/signup}"
+                               class="btn about-primary-btn">
+
+                                Get Started
+
+                                <i class="bi bi-arrow-right ms-2"></i>
+
+                            </a>
+
+                            <a th:href="@{/}"
+                               class="btn about-secondary-btn">
+
+                                <i class="bi bi-house me-2"></i>
+
+                                Back to Home
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Right -->
+
+                <div class="col-lg-5">
+
+                    <div class="about-visual">
+
+                        <div class="about-main-icon">
+
+                            <i class="bi bi-person-lines-fill"></i>
+
+                        </div>
+
+
+                        <div class="about-floating-card card-one">
+
+                            <i class="bi bi-people-fill"></i>
+
+                            <div>
+                                <strong>Contacts</strong>
+                                <small>Easy to manage</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="about-floating-card card-two">
+
+                            <i class="bi bi-shield-check"></i>
+
+                            <div>
+                                <strong>Secure</strong>
+                                <small>Your data matters</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="about-floating-card card-three">
+
+                            <i class="bi bi-lightning-charge-fill"></i>
+
+                            <div>
+                                <strong>Simple</strong>
+                                <small>Fast & efficient</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= WHAT WE DO ================= -->
+
+    <section class="about-content-section">
+
+        <div class="container">
+
+            <div class="row g-5 align-items-center">
+
+                <div class="col-lg-6">
+
+                    <span class="section-label">
+                        WHAT WE DO
+                    </span>
+
+                    <h2>
+                        Everything you need to keep your contacts organized.
+                    </h2>
+
+                    <p>
+                        Managing contacts should not be complicated.
+                        Our platform provides a clean and straightforward
+                        experience where you can keep your important
+                        connections organized in one place.
+                    </p>
+
+                    <p>
+                        Whether you want to add a new contact, update
+                        existing information or manage your personal
+                        contact list, Smarter Contact Management is
+                        designed to make the process simple.
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-6">
+
+                    <div class="about-feature-list">
+
+                        <div class="about-feature">
+
+                            <div class="about-feature-icon purple">
+
+                                <i class="bi bi-person-plus"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Manage Contacts
+                                </h5>
+
+                                <p>
+                                    Easily add and maintain your
+                                    important contacts.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="about-feature">
+
+                            <div class="about-feature-icon blue">
+
+                                <i class="bi bi-search"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Find Information Quickly
+                                </h5>
+
+                                <p>
+                                    Access the contact information
+                                    you need without unnecessary steps.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="about-feature">
+
+                            <div class="about-feature-icon green">
+
+                                <i class="bi bi-phone"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Responsive Experience
+                                </h5>
+
+                                <p>
+                                    Use the application comfortably
+                                    across different screen sizes.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="about-feature">
+
+                            <div class="about-feature-icon orange">
+
+                                <i class="bi bi-layout-text-window"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Simple Interface
+                                </h5>
+
+                                <p>
+                                    A clean interface designed to
+                                    keep things easy to understand.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= VALUES ================= -->
+
+    <section class="values-section">
+
+        <div class="container">
+
+            <div class="text-center section-heading">
+
+                <span>
+                    OUR APPROACH
+                </span>
+
+                <h2>
+                    Built around simplicity
+                </h2>
+
+                <p>
+                    We focus on making everyday contact management
+                    simple, organized and accessible.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4 mt-4">
+
+                <div class="col-md-4">
+
+                    <div class="value-card">
+
+                        <div class="value-number">
+                            01
+                        </div>
+
+                        <i class="bi bi-grid-1x2"></i>
+
+                        <h4>
+                            Simple
+                        </h4>
+
+                        <p>
+                            A straightforward interface that keeps
+                            the important things easy to access.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="value-card">
+
+                        <div class="value-number">
+                            02
+                        </div>
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        <h4>
+                            Efficient
+                        </h4>
+
+                        <p>
+                            Designed to help you manage your contacts
+                            with fewer unnecessary steps.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="value-card">
+
+                        <div class="value-number">
+                            03
+                        </div>
+
+                        <i class="bi bi-shield-check"></i>
+
+                        <h4>
+                            Reliable
+                        </h4>
+
+                        <p>
+                            A structured platform for keeping your
+                            contact information organized.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="about-cta">
+
+        <div class="container">
+
+            <div class="about-cta-card">
+
+                <div>
+
+                    <span>
+                        GET STARTED
+                    </span>
+
+                    <h2>
+                        Start managing your contacts smarter.
+                    </h2>
+
+                    <p>
+                        Create your account and organize your
+                        contacts in one place.
+                    </p>
+
+                </div>
+
+
+                <a th:href="@{/signup}"
+                   class="btn about-cta-btn">
+
+                    Create Account
+
+                    <i class="bi bi-arrow-right ms-2"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+</body>
+
+</html>
