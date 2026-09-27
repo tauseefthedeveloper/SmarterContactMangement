@@ -29,7 +29,14 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/User CSS/UserCss.css}">
-
+	<style>
+		.profile-image {
+		    width: 50px;
+		    height: 50px;
+		    border-radius: 50%;
+		    object-fit: cover;
+		}
+	</style>
 </head>
 
 
@@ -73,15 +80,7 @@
 
     <div class="navbar-right">
 
-        <!-- Notification -->
-
-        <button class="nav-icon-btn">
-
-            <i class="fa-regular fa-bell"></i>
-
-            <span class="notification-dot"></span>
-
-        </button>
+        
 
 
         <!-- User -->
@@ -91,9 +90,10 @@
 
             <div class="user-avatar">
 
-                <span
-                    th:text="${user.name != null ? user.name.substring(0,1).toUpperCase() : 'U'}">
-                    U
+                <span>
+                    <img th:src="@{/images/{image}(image=${user.imageUrl})}"
+                             alt="Profile Photo"
+                             class="profile-avatar">
                 </span>
 
             </div>
@@ -139,9 +139,10 @@
 
             <div class="sidebar-avatar">
 
-                <span
-                    th:text="${user.name != null ? user.name.substring(0,1).toUpperCase() : 'U'}">
-                    U
+                <span>
+			        <img th:src="@{/images/{image}(image=${user.imageUrl})}"
+                             alt="Profile"
+                             class="profile-image">
                 </span>
 
             </div>
