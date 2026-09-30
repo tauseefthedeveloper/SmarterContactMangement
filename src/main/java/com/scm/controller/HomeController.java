@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scm.SmarterContactManagementApplication;
+import com.scm.dao.ContactRepository;
 import com.scm.dao.UserRepository;
 import com.scm.entities.User;
 import com.scm.helper.Message;
@@ -25,6 +26,8 @@ import jakarta.validation.Valid;
 @Controller
 public class HomeController {
 
+    private final ContactRepository contactRepository;
+
 	private final SmarterContactManagementApplication smarterContactManagementApplication;
 
 	@Autowired
@@ -34,15 +37,24 @@ public class HomeController {
 	private UserRepository userRepo;
 	
 	@Autowired
+	private ContactRepository contactRepo;
+	
+	@Autowired
 	private EmailService emailService;
 
-	HomeController(SmarterContactManagementApplication smarterContactManagementApplication) {
+	HomeController(SmarterContactManagementApplication smarterContactManagementApplication, ContactRepository contactRepository) {
 		this.smarterContactManagementApplication = smarterContactManagementApplication;
+		this.contactRepository = contactRepository;
 	}
 
 	@GetMapping("/")
 	public String homePage(Model m) {
 		m.addAttribute("title", "Home - Smarter Contact Management");
+		
+		long totalContact=this.contactRepo.count();
+		
+		m.addAttribute("totalContact", totalContact);
+		
 		return "index";
 	}
 
